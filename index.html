@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <!-- Import Vega & Vega-Lite (does not have to be from CDN) -->
+  <script src="https://cdn.jsdelivr.net/npm/vega@5.20.2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-lite@5.1.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/vega-embed@6.17.0"></script>
+  
+  <!-- CSS file -->
+  <link rel="stylesheet" type="text/css" href="css/styles.css" media="all">
+
+
+</head>
+<body>
+
+<h1> Week 10 Homework</h1>
+<p>Ahmed Mohamed H A Nassar</p>
+<p>28901797</p>
+<p>Domain: Natural Disasters Accross the world </p>
+
+<h2> Visualization A: From Week 9</h2>
+<div id="choropleth_map"></div>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<br>
+<h2> Visualization B: From Week 10</h2>
+<div id="scatter_plot"></div>
+<br>
+<br>
+<br>
+<br>
+<h3>Interactivity Hint</h3>
+<p> Press on the continent in the legend to see all countries belonging to that continent</p>
+<br>
+<br>
+<h3> Note </h3>
+
+<p style="color: red;"> I did not customize alot of the visualization as I am planning to use this in my vis 2 assignment, so I would like to have more room to improve it there.</p>
+<hr>
+<br>
+<br>
+<br>
+<br>
+<script type="text/javascript">
+
+  var v1 = "choropleth_map.vg.json";
+  vegaEmbed('#choropleth_map', v1).then(function(result) {
+  }).catch(console.error);
+
+  var v2 = "scatter_plot2.vg.json";
+  vegaEmbed('#scatter_plot', v2).then(function(result) {
+  }).catch(console.error);
+
+</script>
+
+</body>
+</html>

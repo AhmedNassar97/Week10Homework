@@ -1,0 +1,101 @@
+{
+  "$schema": "https://vega.github.io/schema/vega-lite/v5.json",
+  "width": 1000,
+  "height": 400,
+  "title": "CPI vs Deaths across the globe, 1900-2021",
+  "background":"whitesmoke",
+  "data": {
+    "url": "cpi_death.csv"
+  },
+  "transform": [
+    {"filter": "datum.Total_Deaths < 100000 "}
+  ],
+  "encoding": {
+    "x": {
+      "field": "CPI",
+      "type": "quantitative",
+      "title": "Community Preparedness Index",
+      "axis": {"tickCount": 6},
+      "scale": {"type": "linear", "domain": [1, 100]}
+    },
+    "y": {
+      "field": "Total_Deaths",
+      "type": "quantitative",
+      "title": "Total Deaths",
+      "axis": {"tickCount": 5},
+      "scale": {"type": "linear", "domain": [1, 100000]}
+    }
+  },
+  "layer": [
+    {
+      "params": [
+        {
+          "name": "continent_highlight",
+          "select": {"type": "point", "fields": ["Continent"]},
+          "bind": "legend"
+          } ],
+          "mark": "circle",
+          "encoding": {
+            "color": {
+              "field": "Continent",
+              "type": "nominal",
+              "scale": {
+                "domain": [
+                  "Americas",
+                    "Europe",
+                    "Africa",
+                    "Asia",
+                    "Oceania"
+                  ], "range": [
+                    "#e41a1c",
+                    "#ff7f00",
+                    "#a6cee3",
+                    "#377eb8",
+                    "#a65628"
+                  ]
+                  } },
+              "opacity": {
+                "condition": {
+                  "param": "continent_highlight", "value": 0.6}, 
+                  "value": 0.1},
+              "tooltip": [
+                {"field": "Continent", "type": "nominal"},
+                {"field": "Country", "type": "nominal"},
+                {"field": "Total_Deaths", "title": "Total Deaths", "type": "quantitative", "format": ","},
+                {"field": "CPI", "type": "quantitative", "format": ".2f"}
+              ]
+
+          }
+    },
+    {
+      "mark": {
+        "type": "text",
+        "align": "right",
+        "baseline": "middle",
+        "dx": -12,
+        "fontSize": 11.5,
+        "fontStyle": "italic"
+      },
+      "encoding": {
+        "text": {"field": "Country", "type": "nominal"},
+        "color": {"value": "black"},
+        "opacity": {
+          "condition": {
+            "test": "datum['Country'] == 'Canada' || datum['Country'] == 'Turkey' || datum['Country'] == 'United States of America (the)' || datum['Country'] == 'Peru' ",
+            "value": 1
+          },
+          "value": 0
+        },
+        "tooltip": [
+          {"field": "Continent", "type": "nominal"},
+                {"field": "Country", "type": "nominal"},
+                {"field": "Total_Deaths", "title": "Total Deaths", "type": "quantitative", "format": ","},
+                {"field": "CPI", "type": "quantitative", "format": ".2f"}
+              ]
+      }
+    }
+  ],
+  "config": {
+    "circle": {"size": 300}
+}
+}
